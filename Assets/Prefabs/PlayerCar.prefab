@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3311640177303491890}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.04497, z: 0.03369}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.044970006, z: 0.03369001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 423034224636077534}
   - component: {fileID: 5462284016198715001}
   - component: {fileID: 8069118459834594479}
+  - component: {fileID: 180235727199471785}
   - component: {fileID: 4001989877241513614}
   - component: {fileID: 6165539748803373219}
   m_Layer: 0
@@ -172,9 +173,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265a9bcf99600db4eaf7140cb7fa0e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputController: {fileID: 180235727199471785}
   aimPivot: {fileID: 576011422757209480}
   shotController: {fileID: 8069118459834594479}
-  rotationSpeed: 0
+  rotationSpring:
+    frequency: 15
+    damping: 0.35
+    epsilon: 0.001
   maxRotationAngle: 45
 --- !u!114 &8069118459834594479
 MonoBehaviour:
@@ -189,8 +194,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefabPoolConfig: {fileID: 11400000, guid: 13ff0da2b7c9756479d017c1e3ecfd87, type: 2}
-  shotOrigin: {fileID: 0}
+  shotOrigin: {fileID: 4646840736525593567}
   bulletHolder: {fileID: 0}
+  shotCooldown: 0.5
+  bulletSpeed: 20
+  bulletLifeTime: 5
+--- !u!114 &180235727199471785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193237975114245693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1577240b129b4cf41a9dc82a78923118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &4001989877241513614
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -877,6 +877,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 423034224636077534, guid: 68166401fa7f33e41a2fad96e6c87212, type: 3}
+      propertyPath: moveSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5193237975114245693, guid: 68166401fa7f33e41a2fad96e6c87212, type: 3}
       propertyPath: m_Name
       value: PlayerCar

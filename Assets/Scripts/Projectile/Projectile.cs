@@ -9,6 +9,11 @@ public class Projectile : MonoBehaviour, IPoolableItem
     [SerializeField] private InteractionTrigger interactionTrigger;
     [SerializeField] private Rigidbody rigidbody;
 
+    public void Launch(float velocity)
+    {
+        rigidbody.velocity = velocity * rigidbody.transform.forward;
+    }
+    
     private void OnProjectileHit(Collider collider)
     {
         throw new System.NotImplementedException();
