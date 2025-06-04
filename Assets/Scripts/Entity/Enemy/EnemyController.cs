@@ -5,6 +5,7 @@ using Zenject;
 public class EnemyController : MonoBehaviour, IPoolableItem
 {
     [SerializeField] private HealthController healthController;
+    [SerializeField] private EnemyAnimationController animationController;
 
     [Inject] private PoolSystem _poolSystem;
     
