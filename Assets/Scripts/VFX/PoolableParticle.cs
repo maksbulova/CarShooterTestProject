@@ -1,4 +1,4 @@
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +6,7 @@ public class PoolableParticle : MonoBehaviour, IPoolableItem
 {
     [SerializeField] private ParticleSystem particleSystem;
 
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     /// <summary>
     /// Called by particle system callback

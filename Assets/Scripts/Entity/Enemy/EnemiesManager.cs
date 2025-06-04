@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -15,9 +16,9 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] private Transform enemyHolder;
     [Header("Spawn position")]
     [SerializeField] private float spawnRangeOffset;
-    [SerializeField] private float spawnWidthDistribution;
+    [SerializeField] private float spawnDistribution;
     
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
     [Inject] private PlayerController _playerController;
 
     private void Start()
@@ -54,7 +55,9 @@ public class EnemiesManager : MonoBehaviour
     private Vector3 GetSpawnPosition()
     {
         var spawnPosition = _playerController.transform.position + Vector3.forward * spawnRangeOffset;
-        spawnPosition += Random.Range(-spawnWidthDistribution, spawnWidthDistribution) * Vector3.right;
+        var randomOffset = Random.insideUnitSphere * spawnDistribution;
+        randomOffset.y = 0;
+        spawnPosition += randomOffset;
         return spawnPosition;
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -15,7 +15,7 @@ public class EnemyAnimationController : MonoBehaviour
     [SerializeField] private PoolableParticle particleOnDeath;
     [SerializeField] private PoolConfig deathParticlePoolConfig;
 
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int TakeHit = Animator.StringToHash("TakeHit");
@@ -54,6 +54,7 @@ public class EnemyAnimationController : MonoBehaviour
     public void PlayDeath(HitData hitData)
     {
         PlayParticle(hitData, particleOnDeath);
+        // TODO haptic
     }
 
     private void PlayParticle(HitData hitData, PoolableParticle particle)

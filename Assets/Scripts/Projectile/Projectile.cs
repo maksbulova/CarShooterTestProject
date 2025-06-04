@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BitToolSet;
 using Cysharp.Threading.Tasks;
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
 using Zenject;
 
@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour, IPoolableItem
     [SerializeField] private PoolConfig particleOnHitConfig;
 
     [Inject] private DamageableProvider _damageableProvider;
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
 
     private ProjectileStats _stats;
     private CancellationTokenSource _despawnCancellationTokenSource = new CancellationTokenSource();

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73514bae15994464dad0ba316a1bc8f0, type: 3}
   m_Name: BulletStats
   m_EditorClassIdentifier: 
-  <BulletVelocity>k__BackingField: 50
+  <BulletVelocity>k__BackingField: 80
   <BulletLifeTime>k__BackingField: 3
-  <Damage>k__BackingField: 35
+  <Damage>k__BackingField: 50

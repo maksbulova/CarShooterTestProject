@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
 using Zenject;
 
@@ -10,10 +10,11 @@ public class ShotController : MonoBehaviour
     [Space]
     [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
+    [SerializeField] private TurretVFXController vfxController;
     // TODO Scriptable config
     [SerializeField] private float shotCooldown = 0.5f;
     
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
 
     private float _lastShotTime;
     
@@ -38,6 +39,8 @@ public class ShotController : MonoBehaviour
     
     private void Shot()
     {
+        vfxController.PlayShot();
+        
         var bullet = _poolSystem.Spawn(bulletPrefab);
         bullet.transform.SetPositionAndRotation(shotOrigin.position, Quaternion.LookRotation(shotOrigin.forward));
         bullet.Launch(projectileStats);

@@ -1,4 +1,4 @@
-using Helper.PoolSystem;
+using PoolSystem;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     [SerializeField] private HealthController healthController;
     [SerializeField] private EnemyAnimationController animationController;
 
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     private EnemyStats _enemyStats;
     

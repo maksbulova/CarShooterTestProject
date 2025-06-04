@@ -1,4 +1,3 @@
-using Helper.PoolSystem;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -11,7 +10,7 @@ public class TextPopUp : MonoBehaviour
     [SerializeField] private float jumpDistribution = 1;
     [SerializeField] private float jumpPower = 1;
     
-    [Inject] private PoolSystem _poolSystem;
+    [Inject] private PoolSystem.PoolSystem _poolSystem;
 
     public void PlayText(string text, Vector3 spawnPosition, Color color)
     {

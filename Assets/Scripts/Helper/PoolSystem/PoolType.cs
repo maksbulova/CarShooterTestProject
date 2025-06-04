@@ -1,4 +1,4 @@
-namespace Helper.PoolSystem
+namespace PoolSystem
 {
     public enum PoolType
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Helper.PoolSystem
+namespace PoolSystem
 {
     [CreateAssetMenu(fileName = "PooledItemConfig", menuName = "Scriptable Objects/PooledItemConfig")]
     public class PoolConfig : ScriptableObject

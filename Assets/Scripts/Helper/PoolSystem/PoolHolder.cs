@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
-namespace Helper.PoolSystem
+namespace PoolSystem
 {
     public class PoolHolder<T> where T : class, IPoolableItem
     {
