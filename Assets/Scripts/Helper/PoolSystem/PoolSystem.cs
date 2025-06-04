@@ -7,29 +7,29 @@ namespace Helper.PoolSystem
 {
     public class PoolSystem
     {
-        private Dictionary<GameObject, object> _poolDictionary = new Dictionary<GameObject, object>();
-        private Dictionary<GameObject, object> _spawnedItemDictionary = new Dictionary<GameObject, object>();
+        private Dictionary<GameObject, object> _poolByPrefab = new Dictionary<GameObject, object>();
+        private Dictionary<GameObject, object> _spawnedByPooledItem = new Dictionary<GameObject, object>();
 
         [Inject] private DiContainer _container;
 
         public void InitPool<T>(PoolConfig config) where T : Component, IPoolableItem
         {
             PoolHolder<T> pool = new PoolHolder<T>(_container, config);
-            _poolDictionary.Add(config.Prefab, pool);
+            _poolByPrefab.Add(config.Prefab, pool);
         }
         
         public T Spawn<T>(T prefab) where T : Component, IPoolableItem
         {
-            var pool = GetPool<T>(prefab, _poolDictionary);
+            var pool = GetPool<T>(prefab, _poolByPrefab);
             var item = pool.GetItem();
-            _spawnedItemDictionary.Add(item.gameObject, pool);
+            _spawnedByPooledItem.Add(item.gameObject, pool);
             return item;
         }
 
         public void Despawn<T>(T prefab) where T : Component, IPoolableItem
         {
-            var pool = GetPool<T>(prefab, _spawnedItemDictionary);
-            _spawnedItemDictionary.Remove(prefab.gameObject);
+            var pool = GetPool<T>(prefab, _spawnedByPooledItem);
+            _spawnedByPooledItem.Remove(prefab.gameObject);
             pool.Release(prefab);
         }
 

@@ -7,6 +7,7 @@ public class ShotController : MonoBehaviour
 {
     [SerializeField] private PoolConfig bulletPrefabPoolConfig;
     [SerializeField] private Projectile bulletPrefab;
+    [Space]
     [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
     [SerializeField] private Transform bulletHolder;

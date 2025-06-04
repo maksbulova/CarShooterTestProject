@@ -10,6 +10,7 @@ public class EnemiesManager : MonoBehaviour
     // TODO enemies config provider for different enemies 
     [SerializeField] private PoolConfig enemyPrefabPoolConfig;
     [SerializeField] private EnemyController enemyPrefab;
+    [Space]
     [SerializeField] private EnemyStats enemyStats;
     [SerializeField] private Transform enemyHolder;
     [Header("Spawn position")]
