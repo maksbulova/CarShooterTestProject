@@ -6,12 +6,11 @@ using Zenject;
 public class ShotController : MonoBehaviour
 {
     [SerializeField] private PoolConfig bulletPrefabPoolConfig;
+    [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
     [SerializeField] private Transform bulletHolder;
     // TODO Scriptable config
     [SerializeField] private float shotCooldown = 0.5f;
-    [SerializeField] private float bulletSpeed = 20;
-    [SerializeField] private float bulletLifeTime = 5;
     
     [Inject] private PoolSystem _poolSystem;
 
@@ -36,16 +35,13 @@ public class ShotController : MonoBehaviour
         }
     }
     
-    private async UniTaskVoid Shot()
+    private void Shot()
     {
         var bullet = _poolSystem.Spawn<Projectile>();
         
         bullet.transform.SetPositionAndRotation(shotOrigin.position, Quaternion.LookRotation(shotOrigin.forward));
         bullet.transform.SetParent(bulletHolder);
 
-        bullet.Launch(bulletSpeed);
-        await UniTask.WaitForSeconds(bulletLifeTime);
-        
-        _poolSystem.Despawn(bullet);
+        bullet.Launch(projectileStats);
     }
 }

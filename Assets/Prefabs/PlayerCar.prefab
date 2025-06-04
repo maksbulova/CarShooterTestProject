@@ -194,11 +194,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefabPoolConfig: {fileID: 11400000, guid: 13ff0da2b7c9756479d017c1e3ecfd87, type: 2}
+  projectileStats: {fileID: 11400000, guid: 2ccde14cb9ae18e4187b8ee9e8c5a07e, type: 2}
   shotOrigin: {fileID: 4646840736525593567}
   bulletHolder: {fileID: 0}
   shotCooldown: 0.5
-  bulletSpeed: 20
-  bulletLifeTime: 5
 --- !u!114 &180235727199471785
 MonoBehaviour:
   m_ObjectHideFlags: 0

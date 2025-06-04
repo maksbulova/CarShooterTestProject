@@ -42,23 +42,23 @@ namespace Helper.PoolSystem
         private T CreateFunc()
         {
             var prefab = _container.InstantiatePrefabForComponent<T>(_config.Prefab);
-            prefab.OnPoolCreate();
+            prefab.CreateByPool();
             return prefab;
         }
 
         private void ActionOnGet(T item)
         {
-            item.OnPoolGet();
+            item.GetByPool();
         }
 
         private void ActionOnRelease(T item)
         {
-            item.OnPoolRelease();
+            item.ReleaseByPool();
         }
 
         private void ActionOnDestroy(T item)
         {
-            item.OnPoolDestroy();
+            item.DestroyByPool();
         }
 
         public T GetItem() => _pool.Get();

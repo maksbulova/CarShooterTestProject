@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class TurretController : MonoBehaviour
 {
-    [SerializeField] private InputController inputController;
+    [SerializeField] private TurretInputController inputController;
     [SerializeField] private Transform aimPivot;
     [SerializeField] private ShotController shotController;
     [Header("Rotation")]

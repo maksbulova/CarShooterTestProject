@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class TurretInputController : MonoBehaviour
 {
     public event Action<Vector2> OnPointerDown;
     
+    // TODO rewrite to unitask
     private void Update()
     {
         InputTick();
