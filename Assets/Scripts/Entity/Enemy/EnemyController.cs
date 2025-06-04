@@ -4,10 +4,9 @@ using Zenject;
 
 public class EnemyController : MonoBehaviour, IPoolableItem
 {
-    [SerializeField] private EnemyMovementController movementController;
-    [SerializeField] private HealthController healthController;
-    [SerializeField] private EnemyAnimationController animationController;
-
+    [Inject] private EnemyMovementController movementController;
+    [Inject] private HealthController healthController;
+    [Inject] private EnemyAnimationController animationController;
     [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     private EnemyStats _enemyStats;

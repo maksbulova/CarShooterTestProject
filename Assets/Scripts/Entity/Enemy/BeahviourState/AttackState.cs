@@ -5,42 +5,41 @@ using UnityEngine;
 public class AttackState : IBehaviourState
 {
     private Transform _myTransform;
-    private IDamageable _attackTarget;
+    private Transform _targetTransform;
     
     private EnemyMovementController _movementController;
     private EnemyAttackController _attackController;
+    
+    // TODO extract to some scriptable config
+    private float _attackCheckDistance = 0.5f;
 
-    private CancellationTokenSource _cancellationTokenSource;
     
-    private const float PathUpdateInterval = 0.25f;
-    
-    public AttackState(Transform myTransform, IDamageable attackTarget, 
+    public AttackState(Transform myTransform, Transform targetTransform,  
         EnemyMovementController movementController, EnemyAttackController attackController)
     {
         _myTransform = myTransform;
-        _attackTarget = attackTarget;
+        _targetTransform = targetTransform;
         _movementController = movementController;
         _attackController = attackController;
-
-        _cancellationTokenSource = new CancellationTokenSource();
     }
 
     public void Enter()
     {
-        MovementTick();
+        _movementController.SetSpeedMultiplier(1);
     }
 
-    private async UniTaskVoid MovementTick()
+    public void Update()
     {
-        while (true)
+        _movementController.SetDestination(_targetTransform.position);
+
+        if ((_myTransform.position - _targetTransform.position).sqrMagnitude <=
+            _attackCheckDistance * _attackCheckDistance)
         {
-            await UniTask.WaitForSeconds(PathUpdateInterval, cancellationToken: _cancellationTokenSource.Token);
+            _attackController.Attack();
         }
     }
 
     public void Exit()
     {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
     }
 }
