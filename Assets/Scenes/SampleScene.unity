@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabPoolConfig: {fileID: 11400000, guid: e95b674f3d1ab7d43a1177a43dcd25bf, type: 2}
+  enemyPrefab: {fileID: 7659849910237394364, guid: cca503d8724922140b7501ad96611275, type: 3}
   enemyStats: {fileID: 11400000, guid: d953471a355522a41a327b6aea96b251, type: 2}
   enemyHolder: {fileID: 1323480901}
   spawnRangeOffset: 20

@@ -11,7 +11,7 @@ namespace Helper.PoolSystem
 
         private IObjectPool<T> _pool;
 
-        public PoolHolder(DiContainer container,PoolConfig config)
+        public PoolHolder(DiContainer container, PoolConfig config)
         {
             _container = container;
             _config = config;

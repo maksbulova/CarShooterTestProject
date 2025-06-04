@@ -6,6 +6,7 @@ using Zenject;
 public class ShotController : MonoBehaviour
 {
     [SerializeField] private PoolConfig bulletPrefabPoolConfig;
+    [SerializeField] private Projectile bulletPrefab;
     [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
     [SerializeField] private Transform bulletHolder;
@@ -37,7 +38,7 @@ public class ShotController : MonoBehaviour
     
     private void Shot()
     {
-        var bullet = _poolSystem.Spawn<Projectile>();
+        var bullet = _poolSystem.Spawn(bulletPrefab);
         
         bullet.transform.SetPositionAndRotation(shotOrigin.position, Quaternion.LookRotation(shotOrigin.forward));
         bullet.transform.SetParent(bulletHolder);

@@ -7,39 +7,39 @@ namespace Helper.PoolSystem
 {
     public class PoolSystem
     {
-        private Dictionary<Type, object> _poolDictionary = new Dictionary<Type, object>();
+        private Dictionary<GameObject, object> _poolDictionary = new Dictionary<GameObject, object>();
+        private Dictionary<GameObject, object> _spawnedItemDictionary = new Dictionary<GameObject, object>();
 
         [Inject] private DiContainer _container;
 
-        public void InitPool<T>(PoolConfig config) where T : class, IPoolableItem
+        public void InitPool<T>(PoolConfig config) where T : Component, IPoolableItem
         {
             PoolHolder<T> pool = new PoolHolder<T>(_container, config);
-            _poolDictionary.Add(typeof(T), pool);
+            _poolDictionary.Add(config.Prefab, pool);
         }
         
-        public T Spawn<T>() where T : class, IPoolableItem
+        public T Spawn<T>(T prefab) where T : Component, IPoolableItem
         {
-            var pool = GetPool<T>();
-            return pool?.GetItem();
+            var pool = GetPool<T>(prefab, _poolDictionary);
+            var item = pool.GetItem();
+            _spawnedItemDictionary.Add(item.gameObject, pool);
+            return item;
         }
 
-        public void Despawn<T>(T item) where T : class, IPoolableItem
+        public void Despawn<T>(T prefab) where T : Component, IPoolableItem
         {
-            var pool = GetPool<T>();
-            pool.Release(item);
+            var pool = GetPool<T>(prefab, _spawnedItemDictionary);
+            _spawnedItemDictionary.Remove(prefab.gameObject);
+            pool.Release(prefab);
         }
 
-        private PoolHolder<T> GetPool<T>() where T : class, IPoolableItem
+        private PoolHolder<T> GetPool<T>(T prefab, Dictionary<GameObject, object> dictionary) where T : Component, IPoolableItem
         {
             PoolHolder<T> holder = null;
-            if (_poolDictionary.TryGetValue(typeof(T), out var poolHolder))
-            {
+            if (dictionary.TryGetValue(prefab.gameObject, out var poolHolder))
                 holder = ((PoolHolder<T>)poolHolder);
-            }
             else
-            {
-                Debug.LogError($"{typeof(T)} has no initialized pool");
-            }
+                Debug.LogError($"{prefab.name} has no initialized pool");
             return holder;
         }
     }

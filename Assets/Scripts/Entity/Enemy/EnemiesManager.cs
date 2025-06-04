@@ -9,6 +9,7 @@ public class EnemiesManager : MonoBehaviour
 {
     // TODO enemies config provider for different enemies 
     [SerializeField] private PoolConfig enemyPrefabPoolConfig;
+    [SerializeField] private EnemyController enemyPrefab;
     [SerializeField] private EnemyStats enemyStats;
     [SerializeField] private Transform enemyHolder;
     [Header("Spawn position")]
@@ -38,7 +39,7 @@ public class EnemiesManager : MonoBehaviour
     
     public EnemyController SpawnEnemy()
     {
-        var enemy = _poolSystem.Spawn<EnemyController>();
+        var enemy = _poolSystem.Spawn(enemyPrefab);
 
         var spawnPosition = GetSpawnPosition();
         Quaternion rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
