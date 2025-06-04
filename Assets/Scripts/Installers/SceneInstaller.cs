@@ -8,12 +8,13 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField] private PlayerController playerController;
     [SerializeField] private EnemiesManager enemiesManager;
+    [SerializeField] private PoolSystem poolSystem;
     
     public override void InstallBindings()
     {
-        Container.Bind<PoolSystem>().AsSingle();
         Container.Bind<DamageableProvider>().AsSingle();
 
+        Container.Bind<PoolSystem>().FromInstance(poolSystem);
         Container.Bind<PlayerController>().FromInstance(playerController);
         Container.Bind<EnemiesManager>().FromInstance(enemiesManager);
     }

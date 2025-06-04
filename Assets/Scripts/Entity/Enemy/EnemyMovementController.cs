@@ -7,9 +7,9 @@ public class EnemyMovementController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
 
-    public void Init()
+    public void Init(float moveSpeed)
     {
-        
+        agent.speed = moveSpeed;
     }
 
     public void MoveTo(Vector3 target)

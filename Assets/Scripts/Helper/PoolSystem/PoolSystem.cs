@@ -5,8 +5,10 @@ using Zenject;
 
 namespace Helper.PoolSystem
 {
-    public class PoolSystem
+    public class PoolSystem : MonoBehaviour
     {
+        [SerializeField] private Transform defaultParent;
+        
         private Dictionary<GameObject, object> _poolByPrefab = new Dictionary<GameObject, object>();
         private Dictionary<GameObject, object> _spawnedByPooledItem = new Dictionary<GameObject, object>();
 
@@ -14,8 +16,8 @@ namespace Helper.PoolSystem
 
         public void InitPool<T>(PoolConfig config) where T : Component, IPoolableItem
         {
-            PoolHolder<T> pool = new PoolHolder<T>(_container, config);
-            _poolByPrefab.Add(config.Prefab, pool);
+            PoolHolder<T> pool = new PoolHolder<T>(_container, config, defaultParent);
+            _poolByPrefab.TryAdd(config.Prefab, pool);
         }
         
         public T Spawn<T>(T prefab) where T : Component, IPoolableItem

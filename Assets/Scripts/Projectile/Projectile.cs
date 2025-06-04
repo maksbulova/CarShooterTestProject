@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using BitToolSet;
 using Cysharp.Threading.Tasks;
 using Helper.PoolSystem;
@@ -11,6 +12,9 @@ public class Projectile : MonoBehaviour, IPoolableItem
 {
     [SerializeField] private InteractionTrigger interactionTrigger;
     [SerializeField] private Rigidbody rigidbody;
+    [Header("VFX")]
+    [SerializeField] private PoolableParticle particleOnHit;
+    [SerializeField] private PoolConfig particleOnHitConfig;
 
     [Inject] private DamageableProvider _damageableProvider;
     [Inject] private PoolSystem _poolSystem;
@@ -18,30 +22,38 @@ public class Projectile : MonoBehaviour, IPoolableItem
     private ProjectileStats _stats;
     private CancellationTokenSource _despawnCancellationTokenSource = new CancellationTokenSource();
     
-    public async UniTaskVoid Launch(ProjectileStats stats)
+    public void Launch(ProjectileStats stats)
     {
         _stats = stats;
         rigidbody.velocity = stats.BulletVelocity * rigidbody.transform.forward;
-        
-        await UniTask.WaitForSeconds(stats.BulletLifeTime, cancellationToken: _despawnCancellationTokenSource.Token);
-        
+        AutoDespawnDelay(stats.BulletLifeTime);
+    }
+
+    private async UniTaskVoid AutoDespawnDelay(float lifetime)
+    {
+        await UniTask.WaitForSeconds(lifetime, cancellationToken: _despawnCancellationTokenSource.Token);
+
         _poolSystem.Despawn(this);
     }
-    
+
     private void OnProjectileHit(Collider collider)
     {
-        if (_damageableProvider.TryGetDamageable(collider, out IDamageable damageable))
-        {
-            damageable.TakeDamage(_stats.Damage);
+        if (!_damageableProvider.TryGetDamageable(collider, out IDamageable damageable)) 
+            return;
+
+        var hitEffect = _poolSystem.Spawn(particleOnHit);
+        hitEffect.transform.position = transform.position;
+        
+        damageable.TakeDamage(new HitData(_stats.Damage, transform.position, rigidbody.velocity));
             
-            _despawnCancellationTokenSource.Cancel();
-            _poolSystem.Despawn(this);
-        }
+        _despawnCancellationTokenSource.Cancel();
+        _poolSystem.Despawn(this);
     }
 
     public void CreateByPool()
     {
-    }
+        _poolSystem.InitPool<PoolableParticle>(particleOnHitConfig);
+        }
 
     public void GetByPool()
     {

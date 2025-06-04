@@ -10,8 +10,8 @@ public class HealthController : MonoBehaviour, IDamageable
     
     [Inject] private DamageableProvider _damageableProvider;
     
-    public event Action OnDeath;
-    public event Action OnHit;
+    public event Action<HitData> OnDeath;
+    public event Action<HitData> OnHit;
 
     private float _currentHealth;
 
@@ -26,13 +26,13 @@ public class HealthController : MonoBehaviour, IDamageable
         _damageableProvider.UnregisterDamageable(hitBox);
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(HitData hitData)
     {
-        _currentHealth -= damage;
+        _currentHealth -= hitData.Damage;
 
         if (_currentHealth > 0)
-            OnHit?.Invoke();
+            OnHit?.Invoke(hitData);
         else
-            OnDeath?.Invoke();
+            OnDeath?.Invoke(hitData);
     }
 }

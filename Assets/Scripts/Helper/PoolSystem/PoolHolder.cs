@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
@@ -8,13 +9,15 @@ namespace Helper.PoolSystem
     {
         private DiContainer _container;
         private PoolConfig _config;
+        private Transform _parent;
 
         private IObjectPool<T> _pool;
 
-        public PoolHolder(DiContainer container, PoolConfig config)
+        public PoolHolder(DiContainer container, PoolConfig config, Transform parent)
         {
             _container = container;
             _config = config;
+            _parent = parent;
 
             switch (config.PoolType)
             {
@@ -41,7 +44,7 @@ namespace Helper.PoolSystem
 
         private T CreateFunc()
         {
-            var prefab = _container.InstantiatePrefabForComponent<T>(_config.Prefab);
+            var prefab = _container.InstantiatePrefabForComponent<T>(_config.Prefab, _parent);
             prefab.CreateByPool();
             return prefab;
         }

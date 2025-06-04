@@ -10,7 +10,6 @@ public class ShotController : MonoBehaviour
     [Space]
     [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
-    [SerializeField] private Transform bulletHolder;
     // TODO Scriptable config
     [SerializeField] private float shotCooldown = 0.5f;
     
@@ -40,10 +39,7 @@ public class ShotController : MonoBehaviour
     private void Shot()
     {
         var bullet = _poolSystem.Spawn(bulletPrefab);
-        
         bullet.transform.SetPositionAndRotation(shotOrigin.position, Quaternion.LookRotation(shotOrigin.forward));
-        bullet.transform.SetParent(bulletHolder);
-
         bullet.Launch(projectileStats);
     }
 }

@@ -4,6 +4,7 @@ using Zenject;
 
 public class EnemyController : MonoBehaviour, IPoolableItem
 {
+    [SerializeField] private EnemyMovementController movementController;
     [SerializeField] private HealthController healthController;
     [SerializeField] private EnemyAnimationController animationController;
 
@@ -15,6 +16,8 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     {
         _enemyStats = stats;
         healthController.Init(stats.Health);
+        movementController.Init(stats.MoveSpeed);
+        animationController.Init();
     }
 
     public void CreateByPool()
@@ -39,20 +42,15 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     {
     }
 
-    private void Hit()
+    private void Hit(HitData hitData)
     {
-        // TODO animation
+        animationController.PlayHit(hitData);
     }
 
-    private void Death()
+    private void Death(HitData hitData)
     {
-        // TODO animation
+        animationController.PlayDeath(hitData);
         _poolSystem.Despawn(this);
         healthController.Deinit();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        healthController.TakeDamage(damage);
     }
 }

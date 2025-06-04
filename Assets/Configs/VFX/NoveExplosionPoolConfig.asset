@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73514bae15994464dad0ba316a1bc8f0, type: 3}
-  m_Name: BulletStats
+  m_Script: {fileID: 11500000, guid: 2a57c4277bd01944da0c73535d5df8f2, type: 3}
+  m_Name: NoveExplosionPoolConfig
   m_EditorClassIdentifier: 
-  <BulletVelocity>k__BackingField: 50
-  <BulletLifeTime>k__BackingField: 3
-  <Damage>k__BackingField: 35
+  <Prefab>k__BackingField: {fileID: 162482, guid: ae2cec72c226cca48895f6088b18f0f5, type: 3}
+  <PooledAmount>k__BackingField: 5
+  <PoolType>k__BackingField: 0

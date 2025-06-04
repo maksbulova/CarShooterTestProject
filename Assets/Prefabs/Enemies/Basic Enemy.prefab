@@ -180,6 +180,30 @@ PrefabInstance:
       propertyPath: renderer
       value: 
       objectReference: {fileID: 8139636915888621980}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: particleOnHit
+      value: 
+      objectReference: {fileID: 6668195076444210050, guid: 7f3310d0dada37645ba09b9129abf110, type: 3}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: particleOnDeath
+      value: 
+      objectReference: {fileID: 3869086474076236416, guid: 3c07a3408d710e24bb92009c1b8f7ec4, type: 3}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: poolableItemConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 392889a6e2b452b4c82a4441f2930231, type: 2}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: hitParticlePoolConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 392889a6e2b452b4c82a4441f2930231, type: 2}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: flickAnimator.renderer
+      value: 
+      objectReference: {fileID: 8139636915888621980}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: deathParticlePoolConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 33e71287e7fd82f4e838fad09415331e, type: 2}
     - target: {fileID: 8651371895601250110, guid: 4043341758befd34882d029e754c2e66, type: 3}
       propertyPath: hitBox
       value: 
