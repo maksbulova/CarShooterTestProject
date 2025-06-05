@@ -5,17 +5,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class GameController : MonoBehaviour
+public class GameLoopController : MonoBehaviour
 {
     [Inject] private PlayerController _player;
     [Inject] private StartLevelUI _startLevelUI;
     [Inject] private EndScreenUI _endScreenUI;
-    
+    [Inject] private LevelProgressController _levelProgressController;
+    [Inject] private EnemiesManager _enemiesManager;
+
+    public bool IsLevelActive { get; private set; }
+
     private void Start()
     {
         StartMenuStage();
     }
 
+    // TODO rewrite into stage state machine
     private void StartMenuStage()
     {
         _player.StopMovementStage();
@@ -25,24 +30,28 @@ public class GameController : MonoBehaviour
     
     private void StartGameplayStage()
     {
+        IsLevelActive = true;
         _startLevelUI.OnStartLevelClick -= StartGameplayStage;
         _player.StartMovementStage();
+        _levelProgressController.StartMovementStage();
+        _enemiesManager.StartStage();
     }
     
     public void WinLevel()
     {
-        EndLevel();
+        EndMovementStage();
         _endScreenUI.ShowLevelEnd(true);
     }
 
     public void LooseLevel()
     {
-        EndLevel();
+        EndMovementStage();
         _endScreenUI.ShowLevelEnd(false);
     }
 
-    private void EndLevel()
+    private void EndMovementStage()
     {
+        IsLevelActive = false;
         _endScreenUI.OnTryAgainButton += RestartLevel;
         _player.StopMovementStage();
     }

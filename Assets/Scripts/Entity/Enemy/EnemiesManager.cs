@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using PoolSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,12 +16,17 @@ public class EnemiesManager : MonoBehaviour
     [Space]
     [SerializeField] private EnemyStats enemyStats;
     [SerializeField] private Transform enemyHolder;
+    [Header("Difficulty")]
+    [SerializeField] private AnimationCurve enemySpawnCooldownCurve;
+    [SerializeField] private AnimationCurve enemySpawnAmountCurve;
     [Header("Spawn position")]
     [SerializeField] private float spawnRangeOffset;
     [SerializeField] private float spawnDistribution;
     
     [Inject] private PoolSystem.PoolSystem _poolSystem;
     [Inject] private PlayerController _playerController;
+    [Inject] private GameLoopController _gameLoopController;
+    [Inject] private LevelProgressController _levelProgressController;
 
     private void Start()
     {
@@ -28,9 +35,28 @@ public class EnemiesManager : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             SpawnEnemy();
+#endif
+    }
+
+    public void StartStage()
+    {
+        EnemySpawner();
+    }
+
+    private async UniTaskVoid EnemySpawner()
+    {
+        while (_gameLoopController.IsLevelActive)
+        {
+            var progress = _levelProgressController.LevelProgress;
+            var amount = Mathf.RoundToInt(enemySpawnAmountCurve.Evaluate(progress));
+            for (int i = 0; i < amount; i++)
+                SpawnEnemy();
+
+            var delaySeconds = enemySpawnCooldownCurve.Evaluate(progress);
+            await UniTask.WaitForSeconds(delaySeconds, cancellationToken: this.GetCancellationTokenOnDestroy());
         }
     }
 

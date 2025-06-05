@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TurretController turretController;
     [SerializeField] private PlayerStats playerStats;
 
-    [Inject] private GameController _gameController;
+    [Inject] private GameLoopController _gameLoopController;
     
     private void Start()
     {
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Death(HitData hitData)
     {
         StopMovementStage();
-        _gameController.LooseLevel();
+        _gameLoopController.LooseLevel();
     }
 
     public void StartMovementStage()

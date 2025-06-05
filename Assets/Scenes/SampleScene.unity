@@ -973,6 +973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 831914220}
   - component: {fileID: 831914221}
+  - component: {fileID: 831914222}
   m_Layer: 0
   m_Name: GameloopController
   m_TagString: Untagged
@@ -1007,6 +1008,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff3641c15315914cbaa8c7e7aa19917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &831914222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831914219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e144da0f11bb740ab622a16d8e5192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winDistance: 500
 --- !u!1 &889867018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1825,54 @@ MonoBehaviour:
   enemyPrefab: {fileID: 7659849910237394364, guid: cca503d8724922140b7501ad96611275, type: 3}
   enemyStats: {fileID: 11400000, guid: d953471a355522a41a327b6aea96b251, type: 2}
   enemyHolder: {fileID: 1323480901}
+  enemySpawnCooldownCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0016517639
+      value: 3
+      inSlope: -4.973755
+      outSlope: -4.973755
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.049707554
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: -5.844717
+      outSlope: -5.844717
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.045321707
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  enemySpawnAmountCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 11.145798
+      outSlope: 11.145798
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048245613
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   spawnRangeOffset: 80
   spawnDistribution: 5
 --- !u!1 &1334035176
@@ -1892,7 +1954,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 359992649}
   enemiesManager: {fileID: 1323480902}
-  gameController: {fileID: 831914221}
+  gameLoopController: {fileID: 831914221}
+  levelProgressController: {fileID: 831914222}
   poolSystem: {fileID: 2068849530}
   endScreenUI: {fileID: 340866589}
   startLevelUI: {fileID: 1126846894}
