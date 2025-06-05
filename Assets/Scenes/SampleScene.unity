@@ -578,7 +578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &521361694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,14 +626,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521361693}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11949253, y: 0.877312, z: -0.36617208, w: 0.28629225}
-  m_LocalPosition: {x: -2.77, y: 5.2, z: 4.01}
+  m_LocalRotation: {x: 0.34666026, y: 0.4022475, z: -0.16788954, w: 0.8305641}
+  m_LocalPosition: {x: -3.33, y: 5.2, z: -3.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1557820698}
   m_Father: {fileID: 1991232933}
-  m_LocalEulerAnglesHint: {x: 45.309, y: 143.854, z: 0}
+  m_LocalEulerAnglesHint: {x: 45.309, y: 51.682, z: 0}
 --- !u!1 &575588584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &889867019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,8 +1203,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.326261, y: 0.000000062993465, z: -0.000000021742041, w: 0.9452798}
-  m_LocalPosition: {x: 0, y: 10, z: -7.5}
+  m_LocalRotation: {x: 0.34666026, y: 0.40224752, z: -0.16788954, w: 0.83056414}
+  m_LocalPosition: {x: -3.33, y: 5.2, z: -3.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 0
-  m_BlendUpdateMethod: 1
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -1956,6 +1956,7 @@ MonoBehaviour:
   enemiesManager: {fileID: 1323480902}
   gameLoopController: {fileID: 831914221}
   levelProgressController: {fileID: 831914222}
+  cameraSystem: {fileID: 1991232934}
   poolSystem: {fileID: 2068849530}
   endScreenUI: {fileID: 340866589}
   startLevelUI: {fileID: 1126846894}

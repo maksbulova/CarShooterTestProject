@@ -17,6 +17,12 @@ public class PlayerMovementController : MonoBehaviour
     private float _currentMoveSpeed;
     private float _targetMoveSpeed;
 
+    private void Awake()
+    {
+        CalculateMovementPosition(out var position, out var rotation);
+        rigidbody.transform.position = position;
+    }
+
     public void Init(float moveSpeed, float acceleration)
     {
         _maxMoveSpeed = moveSpeed;

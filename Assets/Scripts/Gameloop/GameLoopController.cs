@@ -7,6 +7,7 @@ using Zenject;
 
 public class GameLoopController : MonoBehaviour
 {
+    [Inject] private CameraSystem _cameraSystem;
     [Inject] private PlayerController _player;
     [Inject] private StartLevelUI _startLevelUI;
     [Inject] private EndScreenUI _endScreenUI;
@@ -23,6 +24,7 @@ public class GameLoopController : MonoBehaviour
     // TODO rewrite into stage state machine
     private void StartMenuStage()
     {
+        _cameraSystem.SetMenuPoV();
         _player.StopMovementStage();
         _startLevelUI.Show();
         _startLevelUI.OnStartLevelClick += StartGameplayStage;
@@ -30,6 +32,7 @@ public class GameLoopController : MonoBehaviour
     
     private void StartGameplayStage()
     {
+        _cameraSystem.SetGameplayPoV();
         IsLevelActive = true;
         _startLevelUI.OnStartLevelClick -= StartGameplayStage;
         _player.StartMovementStage();
@@ -37,23 +40,19 @@ public class GameLoopController : MonoBehaviour
         _enemiesManager.StartStage();
     }
     
-    public void WinLevel()
-    {
-        EndMovementStage();
-        _endScreenUI.ShowLevelEnd(true);
-    }
+    public void WinLevel() => EndMovementStage(true);
 
-    public void LooseLevel()
-    {
-        EndMovementStage();
-        _endScreenUI.ShowLevelEnd(false);
-    }
+    public void LooseLevel() => EndMovementStage(false);
 
-    private void EndMovementStage()
+    private void EndMovementStage(bool win)
     {
+        if (!IsLevelActive)
+            return;
+        
         IsLevelActive = false;
         _endScreenUI.OnTryAgainButton += RestartLevel;
         _player.StopMovementStage();
+        _endScreenUI.ShowLevelEnd(win);
     }
 
     private void RestartLevel()
