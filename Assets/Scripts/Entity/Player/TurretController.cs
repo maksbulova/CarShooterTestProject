@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BitToolSet.Extensions;
 using BitToolSet.ProceduralEasing.Springs;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class TurretController : MonoBehaviour
 {
@@ -16,11 +12,6 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float maxRotationAngle = 45;
 
     private Vector3 _currentAimDirection = Vector3.forward;
-    
-    private void Start()
-    {
-        Init();
-    }
 
     private void Update()
     {
@@ -31,6 +22,11 @@ public class TurretController : MonoBehaviour
     {
         inputController.OnPointerDown += OnInputPointerDown;
         rotationSpring.Init(Vector3.forward);
+    }
+
+    public void Deinit()
+    {
+        inputController.OnPointerDown -= OnInputPointerDown;
     }
 
     private void OnInputPointerDown(Vector2 relativeScreenPosition)

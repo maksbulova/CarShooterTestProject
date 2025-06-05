@@ -11,26 +11,21 @@ public class ShotController : MonoBehaviour
     [SerializeField] private ProjectileStats projectileStats;
     [SerializeField] private Transform shotOrigin;
     [SerializeField] private TurretVFXController vfxController;
-    // TODO Scriptable config
-    [SerializeField] private float shotCooldown = 0.5f;
-    
+
     [Inject] private PoolSystem.PoolSystem _poolSystem;
 
+    private float _shotCooldown;
     private float _lastShotTime;
-    
-    private void Start()
-    {
-        Init();
-    }
 
-    public void Init()
+    public void Init(float shotCooldown)
     {
+        _shotCooldown = shotCooldown;
         _poolSystem.InitPool<Projectile>(bulletPrefabPoolConfig);
     }
 
     public void TryShot()
     {
-        if (Time.time >= _lastShotTime + shotCooldown)
+        if (Time.time >= _lastShotTime + _shotCooldown)
         {
             Shot();
             _lastShotTime = Time.time;

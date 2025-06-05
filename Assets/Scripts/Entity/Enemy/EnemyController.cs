@@ -4,11 +4,11 @@ using Zenject;
 
 public class EnemyController : MonoBehaviour, IPoolableItem
 {
-    [Inject] private EnemyBehaviourController behaviourController;
-    [Inject] private EnemyMovementController movementController;
-    [Inject] private HealthController healthController;
-    [Inject] private EnemyAnimationController animationController;
-    [Inject] private EnemyAttackController attackController;
+    [Inject] private EnemyBehaviourController _behaviourController;
+    [Inject] private EnemyMovementController _movementController;
+    [Inject] private HealthController _healthController;
+    [Inject] private EnemyAnimationController _animationController;
+    [Inject] private EnemyAttackController _attackController;
     [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     private EnemyStats _enemyStats;
@@ -16,10 +16,11 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     public void Init(EnemyStats stats)
     {
         _enemyStats = stats;
-        healthController.Init(stats.Health);
-        movementController.Init(stats.MoveSpeed);
-        animationController.Init();
-        attackController.Init(_enemyStats);
+        _healthController.Init(stats.Health);
+        _movementController.Init(stats.MoveSpeed);
+        _animationController.Init();
+        _behaviourController.Init();
+        _attackController.Init(_enemyStats);
     }
 
     public void CreateByPool()
@@ -28,15 +29,15 @@ public class EnemyController : MonoBehaviour, IPoolableItem
 
     public void GetByPool()
     {
-        healthController.OnHit += Hit;
-        healthController.OnDeath += Death;
+        _healthController.OnHit += Hit;
+        _healthController.OnDeath += Death;
         gameObject.SetActive(true);
     }
 
     public void ReleaseByPool()
     {
-        healthController.OnHit -= Hit;
-        healthController.OnDeath -= Death;
+        _healthController.OnHit -= Hit;
+        _healthController.OnDeath -= Death;
         gameObject.SetActive(false);
     }
 
@@ -46,15 +47,15 @@ public class EnemyController : MonoBehaviour, IPoolableItem
 
     private void Hit(HitData hitData)
     {
-        animationController.PlayHit(hitData);
+        _animationController.PlayHit(hitData);
     }
 
     private void Death(HitData hitData)
     {
-        animationController.PlayDeath(hitData);
-        healthController.Deinit();
-        movementController.Deinit();
-        behaviourController.Death();
+        _animationController.PlayDeath(hitData);
+        _healthController.Deinit();
+        _movementController.Deinit();
+        _behaviourController.Death();
         _poolSystem.Despawn(this);
     }
 }

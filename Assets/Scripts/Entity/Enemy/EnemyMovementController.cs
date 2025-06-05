@@ -18,7 +18,7 @@ public class EnemyMovementController : MonoBehaviour
     [Inject] private EnemyAnimationController _animationController;
     
     private float _maxMoveSpeed;
-    private CancellationTokenSource _rotationCancellationTokenSource;
+    private CancellationTokenSource _rotationCancellationTokenSource = new CancellationTokenSource();
 
     private const int TopAgentPriority = 0;
     private const int LeastAgentPriority = 99;
@@ -27,7 +27,6 @@ public class EnemyMovementController : MonoBehaviour
     {
         _maxMoveSpeed = moveSpeed;
         agent.speed = moveSpeed;
-        _rotationCancellationTokenSource = new CancellationTokenSource();
         agent.avoidancePriority = Random.Range(TopAgentPriority, LeastAgentPriority);
     }
 
@@ -59,6 +58,8 @@ public class EnemyMovementController : MonoBehaviour
                     Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction),
                         rotationSpeed * Time.fixedDeltaTime);
 
+                if(_rotationCancellationTokenSource.IsCancellationRequested)
+                    break;
                 await UniTask.NextFrame(_rotationCancellationTokenSource.Token);
             }
         }
@@ -71,12 +72,10 @@ public class EnemyMovementController : MonoBehaviour
     {
         agent.isStopped = true;
         _rotationCancellationTokenSource.Cancel();
-        _rotationCancellationTokenSource.Dispose();
     }
 
     private void OnDestroy()
     {
-        _rotationCancellationTokenSource.Cancel();
         _rotationCancellationTokenSource.Dispose();
     }
 }

@@ -19,11 +19,6 @@ public class EnemyBehaviourController : MonoBehaviour
     private EnemyBehaviourStateMachine _enemyBehaviourStateMachine;
     private IDamageable _currentAttackTarget;
 
-    private void Start()
-    {
-        Init();
-    }
-
     private void Update()
     {
         _enemyBehaviourStateMachine.Update();
