@@ -12,6 +12,7 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private LevelProgressController levelProgressController;
     [SerializeField] private CameraSystem cameraSystem;
     [SerializeField] private PoolSystem.PoolSystem poolSystem;
+    [SerializeField] private ChromaticAberrationController chromaticAberrationController;
     [Header("UI")]
     [SerializeField] private EndScreenUI endScreenUI;
     [SerializeField] private StartLevelUI startLevelUI;
@@ -26,6 +27,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<GameLoopController>().FromInstance(gameLoopController);
         Container.Bind<LevelProgressController>().FromInstance(levelProgressController);
         Container.Bind<CameraSystem>().FromInstance(cameraSystem);
+        Container.Bind<ChromaticAberrationController>().FromInstance(chromaticAberrationController);
         
         Container.Bind<EndScreenUI>().FromInstance(endScreenUI);
         Container.Bind<StartLevelUI>().FromInstance(startLevelUI);

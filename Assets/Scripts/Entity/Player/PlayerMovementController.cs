@@ -62,6 +62,7 @@ public class PlayerMovementController : MonoBehaviour
         var lookDirection = (position - rigidbody.transform.position).normalized;
         if (lookDirection == Vector3.zero)
             lookDirection = Vector3.forward;
+        
         rotation = Quaternion.LookRotation(lookDirection);
     }
 

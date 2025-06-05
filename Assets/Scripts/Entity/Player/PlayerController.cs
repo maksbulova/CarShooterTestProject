@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ShotController shotController;
     [SerializeField] private TurretController turretController;
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private PlayerAnimationController animationController;
 
     [Inject] private GameLoopController _gameLoopController;
     
@@ -19,16 +20,28 @@ public class PlayerController : MonoBehaviour
         Init();
     }
 
+    private void OnDestroy()
+    {
+        healthController.OnHit -= OnHit;
+        healthController.OnDeath -= OnDeath;
+    }
+
     public void Init()
     {
         healthController.Init(playerStats.Health);
         movementController.Init(playerStats.MoveSpeed, playerStats.Acceleration);
         shotController.Init(playerStats.ShootCooldown);
         
-        healthController.OnDeath += Death;
+        healthController.OnHit += OnHit;
+        healthController.OnDeath += OnDeath;
     }
 
-    private void Death(HitData hitData)
+    private void OnHit(HitData hitData)
+    {
+        animationController.PlayTakeDamage();
+    }
+
+    private void OnDeath(HitData hitData)
     {
         StopMovementStage();
         _gameLoopController.LooseLevel();
