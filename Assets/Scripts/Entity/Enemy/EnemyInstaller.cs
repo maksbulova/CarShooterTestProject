@@ -9,6 +9,7 @@ public class EnemyInstaller : MonoInstaller
     [SerializeField] private HealthController healthController;
     [SerializeField] private EnemyAnimationController animationController;
     [SerializeField] private EnemyAttackController attackController;
+    [SerializeField] private EnemyBehaviourController behaviourController;
     
     public override void InstallBindings()
     {
@@ -17,5 +18,6 @@ public class EnemyInstaller : MonoInstaller
         Container.Bind<HealthController>().FromInstance(healthController);
         Container.Bind<EnemyAnimationController>().FromInstance(animationController);
         Container.Bind<EnemyAttackController>().FromInstance(attackController);
+        Container.Bind<EnemyBehaviourController>().FromInstance(behaviourController);
     }
 }

@@ -693,7 +693,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 7659849910237394364, guid: cca503d8724922140b7501ad96611275, type: 3}
   enemyStats: {fileID: 11400000, guid: d953471a355522a41a327b6aea96b251, type: 2}
   enemyHolder: {fileID: 1323480901}
-  spawnRangeOffset: 80
+  spawnRangeOffset: 10
   spawnDistribution: 5
 --- !u!1 &1334035176
 GameObject:

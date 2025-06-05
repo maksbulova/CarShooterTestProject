@@ -4,9 +4,11 @@ using Zenject;
 
 public class EnemyController : MonoBehaviour, IPoolableItem
 {
+    [Inject] private EnemyBehaviourController behaviourController;
     [Inject] private EnemyMovementController movementController;
     [Inject] private HealthController healthController;
     [Inject] private EnemyAnimationController animationController;
+    [Inject] private EnemyAttackController attackController;
     [Inject] private PoolSystem.PoolSystem _poolSystem;
     
     private EnemyStats _enemyStats;
@@ -17,6 +19,7 @@ public class EnemyController : MonoBehaviour, IPoolableItem
         healthController.Init(stats.Health);
         movementController.Init(stats.MoveSpeed);
         animationController.Init();
+        attackController.Init(_enemyStats);
     }
 
     public void CreateByPool()
@@ -49,7 +52,9 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     private void Death(HitData hitData)
     {
         animationController.PlayDeath(hitData);
-        _poolSystem.Despawn(this);
         healthController.Deinit();
+        movementController.Deinit();
+        behaviourController.Death();
+        _poolSystem.Despawn(this);
     }
 }

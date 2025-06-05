@@ -1,7 +1,4 @@
-
-using System;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 public class WanderState : IBehaviourState
@@ -10,14 +7,11 @@ public class WanderState : IBehaviourState
     private Transform _myTransform;
     
     private Vector3 _currentTarget;
+    private WanderStateContext _stateContext;
 
-    // TODO extract to some scriptable config
-    private float _wanderRange = 3;
-    private Vector2 _wanderSpeedMultiplier = new Vector2(0.25f, 0.75f);
-    private float _destinationCheckDistance = 0.5f;
-    
-    public WanderState(Transform myTransform, EnemyMovementController movementController)
+    public WanderState(WanderStateContext context, Transform myTransform, EnemyMovementController movementController)
     {
+        _stateContext = context;
         _myTransform = myTransform;
         _movementController = movementController;
     }
@@ -29,7 +23,8 @@ public class WanderState : IBehaviourState
 
     public void Update()
     {
-        if ((_myTransform.position - _currentTarget).sqrMagnitude <= _destinationCheckDistance * _destinationCheckDistance)
+        if ((_myTransform.position - _currentTarget).sqrMagnitude <= 
+            _stateContext.DestinationCheckDistance * _stateContext.DestinationCheckDistance)
         {
             ChooseNewWanderPosition();
         }
@@ -37,11 +32,12 @@ public class WanderState : IBehaviourState
 
     private void ChooseNewWanderPosition()
     {
-        Vector3 randomOffset = Random.insideUnitSphere * _wanderSpeedMultiplier;
+        Vector3 randomOffset = Random.insideUnitSphere * _stateContext.WanderRange;
         randomOffset.y = 0;
         _currentTarget = _myTransform.position + randomOffset;
-        _movementController.SetDestination(_currentTarget);
-        _movementController.SetSpeedMultiplier(Random.Range(_wanderSpeedMultiplier.x, _wanderSpeedMultiplier.y));
+        _currentTarget.x = Mathf.Clamp(_currentTarget.x, -_stateContext.RoadWidth, _stateContext.RoadWidth);
+        _movementController.SetSpeedMultiplier(Random.Range(_stateContext.WanderSpeedMultiplier.x, _stateContext.WanderSpeedMultiplier.y));
+        _movementController.SetDestination(_currentTarget, true);
     }
 
     public void Exit()

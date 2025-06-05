@@ -1,24 +1,20 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class AttackState : IBehaviourState
 {
     private Transform _myTransform;
-    private Transform _targetTransform;
+    private Collider _targetHitbox;
     
     private EnemyMovementController _movementController;
     private EnemyAttackController _attackController;
-    
-    // TODO extract to some scriptable config
-    private float _attackCheckDistance = 0.5f;
+    private AttackStateContext _stateContext;
 
-    
-    public AttackState(Transform myTransform, Transform targetTransform,  
+    public AttackState(AttackStateContext context, Transform myTransform, Collider targetHitbox,  
         EnemyMovementController movementController, EnemyAttackController attackController)
     {
+        _stateContext = context;
         _myTransform = myTransform;
-        _targetTransform = targetTransform;
+        _targetHitbox = targetHitbox;
         _movementController = movementController;
         _attackController = attackController;
     }
@@ -30,10 +26,10 @@ public class AttackState : IBehaviourState
 
     public void Update()
     {
-        _movementController.SetDestination(_targetTransform.position);
-
-        if ((_myTransform.position - _targetTransform.position).sqrMagnitude <=
-            _attackCheckDistance * _attackCheckDistance)
+        var targetPosition = _targetHitbox.ClosestPoint(_myTransform.position);
+        _movementController.SetDestination(targetPosition, false);
+        if ((_myTransform.position - targetPosition).sqrMagnitude <=
+            _stateContext.AttackCheckDistance * _stateContext.AttackCheckDistance)
         {
             _attackController.Attack();
         }

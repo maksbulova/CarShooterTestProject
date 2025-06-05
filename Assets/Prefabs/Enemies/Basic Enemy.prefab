@@ -68,7 +68,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1557217290013797678
 PrefabInstance:
@@ -149,6 +149,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c85cd0408538bbf4996fbd0b83887ca1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2766221150175274360}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c85cd0408538bbf4996fbd0b83887ca1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2909752107028837005}
   m_SourcePrefab: {fileID: 100100000, guid: c85cd0408538bbf4996fbd0b83887ca1, type: 3}
 --- !u!4 &1303477230485310149 stripped
 Transform:
@@ -181,6 +184,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2909752107028837005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827670960339374207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400c0760275f4f24c9b1de6e478d0880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &8139636915888621980 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7307535121243759794, guid: c85cd0408538bbf4996fbd0b83887ca1, type: 3}
@@ -267,6 +282,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 392889a6e2b452b4c82a4441f2930231, type: 2}
     - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: animationEventListener
+      value: 
+      objectReference: {fileID: 2909752107028837005}
+    - target: {fileID: 6829199834485044212, guid: 4043341758befd34882d029e754c2e66, type: 3}
       propertyPath: flickAnimator.renderer
       value: 
       objectReference: {fileID: 8139636915888621980}
@@ -278,6 +297,10 @@ PrefabInstance:
       propertyPath: attackController
       value: 
       objectReference: {fileID: 7461778194989747792}
+    - target: {fileID: 8113895764839888049, guid: 4043341758befd34882d029e754c2e66, type: 3}
+      propertyPath: behaviourController
+      value: 
+      objectReference: {fileID: 1838775429840980598}
     - target: {fileID: 8651371895601250110, guid: 4043341758befd34882d029e754c2e66, type: 3}
       propertyPath: hitBox
       value: 
@@ -323,6 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTrigger: {fileID: 454301399566006038}
+  wanderStateContext: {fileID: 11400000, guid: 9620a9292576d7249bd4060d611a5f45, type: 2}
+  attackStateContext: {fileID: 11400000, guid: 7e7f96cec7f40fe4d9fa57ef07b094a9, type: 2}
 --- !u!114 &7461778194989747792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,8 +369,8 @@ Rigidbody:
   m_GameObject: {fileID: 7597858036782918532}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_Drag: 0.2
+  m_AngularDrag: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

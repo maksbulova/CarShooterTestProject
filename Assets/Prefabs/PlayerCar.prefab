@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 576011422757209480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TurretPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155510628538525881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AimLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4646840736525593567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShotOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4020198477094463860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,9 +144,10 @@ GameObject:
   - component: {fileID: 5462284016198715001}
   - component: {fileID: 8069118459834594479}
   - component: {fileID: 180235727199471785}
+  - component: {fileID: 4673931807017641845}
   - component: {fileID: 4001989877241513614}
   - component: {fileID: 6165539748803373219}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,6 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee01a52a74a03349958d94e5d0661f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthController: {fileID: 4673931807017641845}
+  movementController: {fileID: 423034224636077534}
+  playerStats: {fileID: 11400000, guid: b2821526e6883cc43a4d74d4e7e65359, type: 2}
 --- !u!114 &423034224636077534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4001989877241513614}
-  moveSpeed: 5
 --- !u!114 &5462284016198715001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +249,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1577240b129b4cf41a9dc82a78923118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4673931807017641845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193237975114245693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfcaf872a350a41468cce141feb235cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox: {fileID: 6165539748803373219}
 --- !u!54 &4001989877241513614
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -304,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7713343441982451821}
   - component: {fileID: 7504334245239142322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,6 +498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: car
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb55e81a0f64ca64aa457873810227dd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -564,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dc546ce22ca1d2f40a4d239da5cde0da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -588,6 +612,14 @@ PrefabInstance:
     - target: {fileID: 152484, guid: 23fc589b73077394db72d954703e8d1c, type: 3}
       propertyPath: m_Name
       value: BulletMuzzleFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 152484, guid: 23fc589b73077394db72d954703e8d1c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 171576, guid: 23fc589b73077394db72d954703e8d1c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 497846, guid: 23fc589b73077394db72d954703e8d1c, type: 3}
       propertyPath: m_LocalScale.x

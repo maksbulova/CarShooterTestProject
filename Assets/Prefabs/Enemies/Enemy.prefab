@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1602109624897570624}
+  rotationSpeed: 45
 --- !u!114 &6829199834485044212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +92,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  animationEventListener: {fileID: 0}
+  layerWeightChangeDuration: 0.5
   flickAnimator:
     renderer: {fileID: 0}
     flickDuration: 0.25
@@ -166,6 +169,8 @@ MonoBehaviour:
   movementController: {fileID: 1629404867687842997}
   healthController: {fileID: 8651371895601250110}
   animationController: {fileID: 6829199834485044212}
+  attackController: {fileID: 0}
+  behaviourController: {fileID: 0}
 --- !u!195 &1602109624897570624
 NavMeshAgent:
   m_ObjectHideFlags: 0

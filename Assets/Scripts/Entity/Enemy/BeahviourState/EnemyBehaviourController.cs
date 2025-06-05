@@ -8,6 +8,8 @@ using Zenject;
 public class EnemyBehaviourController : MonoBehaviour
 {
     [SerializeField] private InteractionTrigger interactionTrigger;
+    [SerializeField] private WanderStateContext wanderStateContext;
+    [SerializeField] private AttackStateContext attackStateContext;
 
     [Inject] private DamageableProvider _damageableProvider;
     [Inject] private EnemyMovementController _movementController;
@@ -33,7 +35,15 @@ public class EnemyBehaviourController : MonoBehaviour
         interactionTrigger.OnTriggerEnterE += OnInteractionStart;
         interactionTrigger.OnTriggerExitE += OnInteractionEnd;
         
-        _enemyBehaviourStateMachine.SetState(new WanderState(_rootTransform, _movementController));
+        _enemyBehaviourStateMachine.SetState(new WanderState(wanderStateContext, _rootTransform, _movementController));
+    }
+
+    public void Death()
+    {
+        interactionTrigger.OnTriggerEnterE -= OnInteractionStart;
+        interactionTrigger.OnTriggerExitE -= OnInteractionEnd;
+        
+        _enemyBehaviourStateMachine.SetState(new DeadState());
     }
 
     private void OnInteractionStart(Collider collider)
@@ -43,7 +53,7 @@ public class EnemyBehaviourController : MonoBehaviour
         
         _currentAttackTarget = damageable;
         _enemyBehaviourStateMachine.SetState(
-            new AttackState(_rootTransform, collider.transform, 
+            new AttackState(attackStateContext, _rootTransform, collider, 
                 _movementController, _attackController));
     }
 
@@ -52,7 +62,7 @@ public class EnemyBehaviourController : MonoBehaviour
         if (_damageableProvider.TryGetDamageable(collider, out IDamageable damageable) &&
             _currentAttackTarget == damageable)
         {
-             _enemyBehaviourStateMachine.SetState(new WanderState(_rootTransform, _movementController));
+             _enemyBehaviourStateMachine.SetState(new WanderState(wanderStateContext, _rootTransform, _movementController));
         }
     }
 }

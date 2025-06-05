@@ -8,8 +8,14 @@ public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidbody;
     // TODO scriptable object config
-    [SerializeField] private float moveSpeed = 5;
+    
+    private float _moveSpeed;
 
+    public void Init(float moveSpeed)
+    {
+        _moveSpeed = moveSpeed;
+    }
+    
     private void Update()
     {
         MovementTick();
@@ -18,6 +24,6 @@ public class PlayerMovementController : MonoBehaviour
     // TODO unitask
     private void MovementTick()
     {
-        rigidbody.Move( rigidbody.transform.position + moveSpeed * Time.fixedDeltaTime * rigidbody.transform.forward, quaternion.identity);
+        rigidbody.Move( rigidbody.transform.position + _moveSpeed * Time.fixedDeltaTime * rigidbody.transform.forward, quaternion.identity);
     }
 }
