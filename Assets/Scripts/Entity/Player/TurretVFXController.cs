@@ -1,29 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[Serializable]
-public class TurretVFXController
+namespace Player
 {
-    [SerializeField] private ParticleSystem muzzleFlash;
-    [Header("Recoil")]
-    [SerializeField] private Transform recoilModel;
-    [SerializeField] private Vector3 recoilDirection = Vector3.back;
-    [SerializeField] private float recoilDuration = 0.25f;
-    [SerializeField] private AnimationCurve recoilCurve;
-
-    private Tween _recoilTween;
-    
-    public void PlayShot()
+    [Serializable]
+    public class TurretVFXController
     {
-        muzzleFlash.Play();
+        [SerializeField] private ParticleSystem muzzleFlash;
+        [Header("Recoil")]
+        [SerializeField] private Transform recoilModel;
+        [SerializeField] private Vector3 recoilDirection = Vector3.back;
+        [SerializeField] private float recoilDuration = 0.25f;
+        [SerializeField] private AnimationCurve recoilCurve;
 
-        _recoilTween?.Rewind();
-        _recoilTween = recoilModel.DOLocalMove(recoilDirection, recoilDuration)
-            .From(Vector3.zero)
-            .SetEase(recoilCurve);
+        private Tween _recoilTween;
+    
+        public void PlayShot()
+        {
+            muzzleFlash.Play();
+
+            _recoilTween?.Rewind();
+            _recoilTween = recoilModel.DOLocalMove(recoilDirection, recoilDuration)
+                .From(Vector3.zero)
+                .SetEase(recoilCurve);
+        }
     }
 }

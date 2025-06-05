@@ -1,61 +1,65 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using DamageSystem;
 using UnityEngine;
 using Zenject;
 
-public class PlayerController : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private HealthController healthController;
-    [SerializeField] private PlayerMovementController movementController;
-    [SerializeField] private ShotController shotController;
-    [SerializeField] private TurretController turretController;
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private PlayerAnimationController animationController;
+    public class PlayerController : MonoBehaviour
+    {
+        [SerializeField] private HealthController healthController;
+        [SerializeField] private PlayerMovementController movementController;
+        [SerializeField] private ShotController shotController;
+        [SerializeField] private TurretController turretController;
+        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private RamCollisionController ramCollisionController;
 
-    [Inject] private GameLoopController _gameLoopController;
+        [Inject] private GameLoopController _gameLoopController;
     
-    private void Start()
-    {
-        Init();
-    }
+        private void Start()
+        {
+            Init();
+        }
 
-    private void OnDestroy()
-    {
-        healthController.OnHit -= OnHit;
-        healthController.OnDeath -= OnDeath;
-    }
+        private void OnDestroy()
+        {
+            healthController.OnHit -= OnHit;
+            healthController.OnDeath -= OnDeath;
+        }
 
-    public void Init()
-    {
-        healthController.Init(playerStats.Health);
-        movementController.Init(playerStats.MoveSpeed, playerStats.Acceleration);
-        shotController.Init(playerStats.ShootCooldown);
+        public void Init()
+        {
+            healthController.Init(playerStats.Health);
+            movementController.Init(playerStats.MoveSpeed, playerStats.Acceleration);
+            shotController.Init(playerStats.ShootCooldown);
         
-        healthController.OnHit += OnHit;
-        healthController.OnDeath += OnDeath;
-    }
+            healthController.OnHit += OnHit;
+            healthController.OnDeath += OnDeath;
+        }
 
-    private void OnHit(HitData hitData)
-    {
-        animationController.PlayTakeDamage();
-    }
+        private void OnHit(HitData hitData)
+        {
+            animationController.PlayTakeDamage();
+        }
 
-    private void OnDeath(HitData hitData)
-    {
-        StopMovementStage();
-        _gameLoopController.LooseLevel();
-    }
+        private void OnDeath(HitData hitData)
+        {
+            StopMovementStage();
+            _gameLoopController.LooseLevel();
+        }
 
-    public void StartMovementStage()
-    {
-        movementController.StartMovement();
-        turretController.Init();
-    }
+        public void StartMovementStage()
+        {
+            movementController.StartMovement();
+            turretController.Init();
+            ramCollisionController.Init(healthController);
+        }
     
-    public void StopMovementStage()
-    {
-        movementController.StopMovement();
-        turretController.Deinit();
+        public void StopMovementStage()
+        {
+            movementController.StopMovement();
+            turretController.Deinit();
+            ramCollisionController.Deinit();
+        }
     }
 }

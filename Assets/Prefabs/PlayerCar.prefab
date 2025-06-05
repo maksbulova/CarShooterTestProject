@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &44564950966736578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9178644445305311873}
+  - component: {fileID: 2670612793719379587}
+  - component: {fileID: 2808069557249801845}
+  m_Layer: 6
+  m_Name: RamTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9178644445305311873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44564950966736578}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7566700672721698468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2670612793719379587
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44564950966736578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2808069557249801845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44564950966736578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36f107643495924f9192273d9ff4a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 128
+  trigger: {fileID: 2670612793719379587}
 --- !u!1 &427185611251316526
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +216,7 @@ GameObject:
   - component: {fileID: 180235727199471785}
   - component: {fileID: 4673931807017641845}
   - component: {fileID: 5073696857361737640}
+  - component: {fileID: 1815921172959056200}
   - component: {fileID: 4001989877241513614}
   - component: {fileID: 6165539748803373219}
   m_Layer: 6
@@ -172,6 +243,7 @@ Transform:
   - {fileID: 6497870372752311638}
   - {fileID: 5747748179644751039}
   - {fileID: 3750280965049994673}
+  - {fileID: 9178644445305311873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6219977426874363992
@@ -192,6 +264,7 @@ MonoBehaviour:
   turretController: {fileID: 5462284016198715001}
   playerStats: {fileID: 11400000, guid: b2821526e6883cc43a4d74d4e7e65359, type: 2}
   animationController: {fileID: 5073696857361737640}
+  ramCollisionController: {fileID: 1815921172959056200}
 --- !u!114 &423034224636077534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +469,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1815921172959056200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193237975114245693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4a7762d3414294fa180b85e55c98c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionTrigger: {fileID: 2808069557249801845}
+  ramDamage: 100
+  ramSelfDamage: 5
 --- !u!54 &4001989877241513614
 Rigidbody:
   m_ObjectHideFlags: 0

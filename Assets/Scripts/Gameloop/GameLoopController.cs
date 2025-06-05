@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
+using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -14,6 +16,8 @@ public class GameLoopController : MonoBehaviour
     [Inject] private LevelProgressController _levelProgressController;
     [Inject] private EnemiesManager _enemiesManager;
 
+    public event Action<bool> OnLevelComplete;
+    
     public bool IsLevelActive { get; private set; }
 
     private void Start()
@@ -53,6 +57,8 @@ public class GameLoopController : MonoBehaviour
         _endScreenUI.OnTryAgainButton += RestartLevel;
         _player.StopMovementStage();
         _endScreenUI.ShowLevelEnd(win);
+        
+        OnLevelComplete?.Invoke(win);
     }
 
     private void RestartLevel()

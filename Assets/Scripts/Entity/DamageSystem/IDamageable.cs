@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IDamageable
+namespace DamageSystem
 {
-    public void TakeDamage(HitData hitData);
+    public interface IDamageable
+    {
+        public void TakeDamage(HitData hitData);
+    }
 }

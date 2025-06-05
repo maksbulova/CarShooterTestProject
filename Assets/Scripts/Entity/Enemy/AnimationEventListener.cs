@@ -1,14 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationEventListener : MonoBehaviour
+namespace Enemy
 {
-    public event Action OnHit;
-    
-    public void OnHitAnimationEvent()
+    public class AnimationEventListener : MonoBehaviour
     {
-        OnHit?.Invoke();
+        public event Action OnHit;
+    
+        public void OnHitAnimationEvent()
+        {
+            OnHit?.Invoke();
+        }
     }
 }
