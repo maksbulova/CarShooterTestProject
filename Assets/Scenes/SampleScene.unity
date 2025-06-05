@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e144da0f11bb740ab622a16d8e5192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winDistance: 400
+  winDistance: 300
 --- !u!1 &889867018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +1995,7 @@ MonoBehaviour:
       outWeight: 0.049707554
     - serializedVersion: 3
       time: 1
-      value: 0.5
+      value: 1
       inSlope: -5.844717
       outSlope: -5.844717
       tangentMode: 0
@@ -2019,9 +2019,9 @@ MonoBehaviour:
       outWeight: 0.048245613
     - serializedVersion: 3
       time: 1
-      value: 5
-      inSlope: 4
-      outSlope: 4
+      value: 4
+      inSlope: 3
+      outSlope: 3
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
