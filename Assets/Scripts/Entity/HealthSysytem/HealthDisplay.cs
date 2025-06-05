@@ -8,6 +8,7 @@ using UnityEngine;
 public class HealthDisplay : MonoBehaviour
 {
     [SerializeField] private MMProgressBar healthProgressbar;
+    [SerializeField] private TextPopUp textPopUp;
     [SerializeField] private RectTransform content;
     [SerializeField] private float showHideDuration = 0.5f;
     [SerializeField] private Ease showEase = Ease.OutBack;

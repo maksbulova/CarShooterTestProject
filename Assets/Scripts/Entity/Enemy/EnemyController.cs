@@ -1,3 +1,4 @@
+using System;
 using PoolSystem;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,7 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     [Inject] private EnemyAnimationController _animationController;
     [Inject] private EnemyAttackController _attackController;
     [Inject] private PoolSystem.PoolSystem _poolSystem;
+    [Inject] private PlayerController _player;
     
     private EnemyStats _enemyStats;
     
@@ -53,9 +55,23 @@ public class EnemyController : MonoBehaviour, IPoolableItem
     private void Death(HitData hitData)
     {
         _animationController.PlayDeath(hitData);
+        Despawn();
+    }
+
+    private void Despawn()
+    {
         _healthController.Deinit();
         _movementController.Deinit();
         _behaviourController.Death();
         _poolSystem.Despawn(this);
+    }
+
+    public void CheckDespawn()
+    {
+        if (_player.transform.position.z > transform.position.z &&
+            !_animationController.IsVisible)
+        {
+            Despawn();
+        }
     }
 }

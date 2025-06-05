@@ -12,6 +12,7 @@ public class EnemyAnimationController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private AnimationEventListener animationEventListener;
+    [SerializeField] private Renderer renderer;
     [SerializeField] private float layerWeightChangeDuration = 0.5f;
     
     [SerializeField] private FlickAnimator flickAnimator;
@@ -20,8 +21,11 @@ public class EnemyAnimationController : MonoBehaviour
     [SerializeField] private PoolableParticle particleOnDeath;
     [SerializeField] private PoolConfig deathParticlePoolConfig;
 
+    [Inject] private EnemyController _enemyController;
     [Inject] private PoolSystem.PoolSystem _poolSystem;
 
+    public bool IsVisible => renderer.isVisible;
+    
     private Action _hitCallback;
     private int _upperBodyLayerIndex;
     private Dictionary<int, Tween> _changeLayerWeightDictionary = new Dictionary<int, Tween>();
@@ -51,6 +55,13 @@ public class EnemyAnimationController : MonoBehaviour
         _poolSystem.InitPool<PoolableParticle>(hitParticlePoolConfig);
         _poolSystem.InitPool<PoolableParticle>(deathParticlePoolConfig);
     }
+    
+    
+    private void OnBecameInvisible()
+    {
+        _enemyController.CheckDespawn();
+    }
+
 
     public void SetMoveSpeed(float relativeSpeed)
     {

@@ -4,6 +4,7 @@ using Zenject;
 
 public class EnemyInstaller : MonoInstaller
 {
+    [SerializeField] private EnemyController enemyController;
     [SerializeField] private Transform rootTransform;
     [SerializeField] private EnemyMovementController movementController;
     [SerializeField] private HealthController healthController;
@@ -13,6 +14,7 @@ public class EnemyInstaller : MonoInstaller
     
     public override void InstallBindings()
     {
+        Container.Bind<EnemyController>().FromInstance(enemyController);
         Container.Bind<Transform>().FromInstance(rootTransform);
         Container.Bind<EnemyMovementController>().FromInstance(movementController);
         Container.Bind<HealthController>().FromInstance(healthController);

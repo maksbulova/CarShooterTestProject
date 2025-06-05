@@ -11,6 +11,7 @@ public class EnemyBehaviourController : MonoBehaviour
     [SerializeField] private WanderStateContext wanderStateContext;
     [SerializeField] private AttackStateContext attackStateContext;
 
+    [Inject] private EnemyController _enemyController;
     [Inject] private DamageableProvider _damageableProvider;
     [Inject] private EnemyMovementController _movementController;
     [Inject] private EnemyAttackController _attackController;
@@ -59,5 +60,7 @@ public class EnemyBehaviourController : MonoBehaviour
         {
              _enemyBehaviourStateMachine.SetState(new WanderState(wanderStateContext, _rootTransform, _movementController));
         }
+        
+        _enemyController.CheckDespawn();
     }
 }
